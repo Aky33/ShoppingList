@@ -1,0 +1,32 @@
+{
+  "name": "shopping-list-be",
+  "version": "1.0.0",
+  "description": "Projekt pro Bekendové systémy",
+  "type": "module",
+  "scripts": {
+    "start": "node --loader ts-node/esm src/app.ts",
+    "build": "tsc",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "TZ",
+  "license": "ISC",
+  "dependencies": {
+    "ajv": "^8.17.1",
+    "better-sqlite3": "^11.10.0",
+    "cors": "^2.8.5",
+    "express": "^5.1.0",
+    "mongodb": "^7.0.0",
+    "mongoose": "^8.19.3",
+    "sqlite3": "^5.1.7"
+  },
+  "devDependencies": {
+    "@types/ajv": "^0.0.5",
+    "@types/better-sqlite3": "^7.6.13",
+    "@types/cors": "^2.8.18",
+    "@types/express": "^5.0.1",
+    "@types/mongodb": "^4.0.6",
+    "@types/node": "^22.15.17",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.9.3"
+  }
+}
