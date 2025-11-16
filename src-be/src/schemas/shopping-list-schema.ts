@@ -1,13 +1,13 @@
 import { JSONSchemaType } from "ajv";
 
 export interface ShoppingListFiltr {
-  id: number;
+  id: string;
 }
 
 export const shoppingListFiltrSchema: JSONSchemaType<ShoppingListFiltr> = {
     type: 'object',
     properties: {
-        id: { type: 'integer', minimum: 1 }
+        id: { type: 'string', minimum: 1 }
     },
     required: ['id'],
     additionalProperties: false
@@ -15,15 +15,13 @@ export const shoppingListFiltrSchema: JSONSchemaType<ShoppingListFiltr> = {
 
 export interface ShoppingListInput {
   name: string;
-  idOwner: number;
 }
 
 export const shoppingListInputSchema: JSONSchemaType<ShoppingListInput> = {
     type: 'object',
     properties: {
-        name: { type: 'string' },
-        idOwner: { type: 'number' }
+        name: { type: 'string' }
     },
-    required: ['name', 'idOwner'],
+    required: ['name'],
     additionalProperties: false
 };

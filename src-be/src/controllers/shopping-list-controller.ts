@@ -16,7 +16,7 @@ class ShoppingListController {
 
     async get(req: any, res: any, next: any) {
         try {
-            const filtr = req.body as ShoppingListFiltr;
+            const filtr = req.params as ShoppingListFiltr;
             const list = await shoppingListService.get(filtr.id);
             res.json(list);
         } catch (err) {
@@ -29,7 +29,7 @@ class ShoppingListController {
             const input = req.body as ShoppingListInput;
             const model = new ShoppingList({
                 name: input.name,
-                idOwner: input.idOwner,
+                idOwner: "idOwnera",    //TODO
                 isDeleted: false
             });
 

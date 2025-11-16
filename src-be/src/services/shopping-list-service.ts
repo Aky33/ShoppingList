@@ -5,7 +5,7 @@ class ShoppingListService {
         return await ShoppingList.find();
     }
 
-    async get(id: number): Promise<IShoppingList | null> {
+    async get(id: string): Promise<IShoppingList | null> {
         return await ShoppingList.findById(id);
     }
 

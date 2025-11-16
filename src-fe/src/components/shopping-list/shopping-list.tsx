@@ -1,8 +1,8 @@
 import { Link } from "react-router-dom"
-import type { KategorieOutputType } from "../types/KategorieOutputType"
+import type { ShoppingListOutputType } from "../types/shopping-list-output-type"
 
 type Props = {
-    lists: KategorieOutputType[]
+    lists: ShoppingListOutputType[]
 }
 
 const ShoppingList = ({ lists }: Props) => {
@@ -10,7 +10,7 @@ const ShoppingList = ({ lists }: Props) => {
         <div>
             {lists.map((item) => (
                 <div>
-                    <Link className="btn btn-light mb-1 col-12" to={`/shopping-list/${item.id}`}>{item.nazev}</Link>
+                    <Link className="btn btn-light mb-1 col-12" to={`/shopping-list/${item._id}`}>{item.name}</Link>
                 </div>
             ))}
         </div>

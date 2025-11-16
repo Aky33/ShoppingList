@@ -3,19 +3,19 @@ import { Container, Card, Alert, Button, Modal } from "react-bootstrap"
 import { FaPlus } from "react-icons/fa"
 
 import { useFetch } from "../../hooks/UseFetch"
-import KategorieFormular from "../../components/KategorieFormular"
-import ShoppingList from "../../components/shopping-list"
+import ShoppingList from "../../components/shopping-list/shopping-list"
+import ShoppingListAddForm from "../../components/shopping-list/shopping-list-add-form"
 
-import type { KategorieOutputType } from "../../types/KategorieOutputType"
+import type { ShoppingListOutputType } from "../../types/shopping-list-output-type"
 
 
 const KategorieSeznam = () => {
-    const {data: kategorie, refetch, error} = useFetch<KategorieOutputType[]>('http://localhost:8080/kategorie')
+    const {data, refetch, error} = useFetch<ShoppingListOutputType[]>('http://localhost:8080/shopping-list/list')
     const [showModal, setShowModal] = useState(false)
 
     //Musí být specificky napsáno jinak se perou typy
-    const zmakniOtevreniModalu = () => setShowModal(true)
-    const zmakniZavreniModalu = () => setShowModal(false)
+    const openModal = () => setShowModal(true)
+    const closeModal = () => setShowModal(false)
 
     return (
         <Container>
@@ -25,25 +25,25 @@ const KategorieSeznam = () => {
                 </Card.Header>
                 <Card.Body>
                     {error && <Alert variant="danger">{error}</Alert>}
-                    {kategorie && kategorie.length == 0 && <div>Nic tu není.</div>}
-                    {kategorie && <ShoppingList lists={kategorie} />}
+                    {data && data.length == 0 && <div>Nic tu není.</div>}
+                    {data && <ShoppingList lists={data} />}
                 </Card.Body>
                 <Card.Footer>
                     <div className="d-flex justify-content-end">
-                        <Button onClick={zmakniOtevreniModalu}>
+                        <Button onClick={openModal}>
                             <FaPlus />
                         </Button>
                     </div>
 
-                    <Modal show={showModal} onHide={zmakniZavreniModalu}>
+                    <Modal show={showModal} onHide={closeModal}>
                         <Modal.Header closeButton>
                             <Modal.Title>Vložení nové Kategorie</Modal.Title>
                         </Modal.Header>
                         <Modal.Body>
-                            <KategorieFormular 
-                                onVlozeni={() => {
+                            <ShoppingListAddForm 
+                                onInsert={() => {
                                     refetch()
-                                    zmakniZavreniModalu()
+                                    closeModal()
                                 }} 
                             />
                         </Modal.Body>

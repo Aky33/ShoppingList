@@ -4,9 +4,21 @@ import { ValidationError } from '../models/errors/validation-error.js';
 
 const ajv = new Ajv({ coerceTypes: true });
 
-export function validateRequest<T>(schema: JSONSchemaType<T>) {
+export function validateBody<T>(schema: JSONSchemaType<T>) {
     return (req: Request, res: Response, next: NextFunction) => {
         const valid = ajv.validate(schema, req.body);
+
+        if (!valid) {
+            throw new ValidationError();
+        }
+
+        next();
+    };
+}
+
+export function validateParams<T>(schema: JSONSchemaType<T>) {
+    return (req: Request, res: Response, next: NextFunction) => {
+        const valid = ajv.validate(schema, req.params);
 
         if (!valid) {
             throw new ValidationError();
