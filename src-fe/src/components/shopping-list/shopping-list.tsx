@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom"
-import type { ShoppingListOutputType } from "../types/shopping-list-output-type"
+import type { ShoppingListOutputType } from "../../types/shopping-list-output-type"
 
 type Props = {
     lists: ShoppingListOutputType[]

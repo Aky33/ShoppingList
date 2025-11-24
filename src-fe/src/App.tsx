@@ -51,7 +51,7 @@ const App = () => {
       idUser: "000002"
     },
   ])
-  const [users, setUsers] = useState<UserOutputType[]>([
+  const [users] = useState<UserOutputType[]>([
     {
       _id: "000001",
       login: "FrantaFlinta"

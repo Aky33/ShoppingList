@@ -1,5 +1,5 @@
 import React from 'react';
-import NavBar from '../components/nav-bar';
+import NavBar from '../components/common/nav-bar';
 import { Container } from 'react-bootstrap';
 
 type LayoutProps = {

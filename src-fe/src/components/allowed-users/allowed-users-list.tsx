@@ -1,5 +1,4 @@
 import { Button } from "react-bootstrap"
-import type { EntityOutputType } from "../../types/entity-output-type"
 import { FaTrash } from "react-icons/fa"
 import type { AllowedUserOutputType } from "../../types/allowed-user-output-type"
 import type { UserOutputType } from "../../types/user-output-type"

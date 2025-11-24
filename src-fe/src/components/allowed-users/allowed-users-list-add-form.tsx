@@ -3,7 +3,7 @@ import type { FormEvent } from "react"
 import { Form, Button } from "react-bootstrap"
 //import usePost from "../hooks/UsePost"
 import { useTranslation } from "react-i18next";
-import type { AllowedUserOutputType } from "../../types/allowed-user-output-type";
+//import type { AllowedUserOutputType } from "../../types/allowed-user-output-type";
 import type { UserOutputType } from "../../types/user-output-type";
 
 type Props = {
