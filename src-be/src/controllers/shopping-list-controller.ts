@@ -29,7 +29,7 @@ class ShoppingListController {
             const input = req.body as ShoppingListInput;
             const model = new ShoppingList({
                 name: input.name,
-                idOwner: "idOwnera",    //TODO
+                idOwner:req.user.id,
                 isDeleted: false
             });
 

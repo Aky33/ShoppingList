@@ -1,10 +1,9 @@
 import mongoose from "mongoose";
-
-const URI = "mongodb://localhost:27017";
+import { config } from "../config.js";
 
 export async function connectDB() {
   try {
-    await mongoose.connect(URI, {
+    await mongoose.connect(config.MONGO_URI, {
         auth: { username: "admin", password: "admin"},
         authSource: "admin"
     });
