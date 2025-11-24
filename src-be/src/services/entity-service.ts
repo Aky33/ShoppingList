@@ -10,7 +10,7 @@ class EntityService {
     }
 
     async insert(model: IEntity) {
-        await Entity.insertMany(model);
+        await Entity.create(model);
     }
 }
 

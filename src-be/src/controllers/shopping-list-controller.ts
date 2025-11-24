@@ -1,14 +1,11 @@
 import { ShoppingList } from '../models/shopping-list.js';
-import { ShoppingListFiltr, ShoppingListInput } from '../schemas/shopping-list-schema.js';
 import shoppingListService  from '../services/shopping-list-service.js';
 
 class ShoppingListController {
     async list(req: any, res: any, next: any) {
         try {
-            //TODO listovat podle filtru
-
-            const lists = await shoppingListService.list();
-            res.json(lists);
+            const list = await shoppingListService.list();
+            res.json(list);
         } catch (err) {
             next(err);
         }
@@ -16,9 +13,10 @@ class ShoppingListController {
 
     async get(req: any, res: any, next: any) {
         try {
-            const filtr = req.params as ShoppingListFiltr;
-            const list = await shoppingListService.get(filtr.id);
-            res.json(list);
+            const { id } = req.params;
+            const model = await shoppingListService.get(id);
+
+            res.json(model);
         } catch (err) {
             next(err);
         }
@@ -26,9 +24,9 @@ class ShoppingListController {
 
     async insert(req: any, res: any, next: any) {
         try {
-            const input = req.body as ShoppingListInput;
+            const { name } = req.body;
             const model = new ShoppingList({
-                name: input.name,
+                name,
                 idOwner:req.user.id,
                 isDeleted: false
             });

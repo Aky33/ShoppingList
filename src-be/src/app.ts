@@ -5,8 +5,12 @@ import cookieParser from "cookie-parser";
 const app = express();
 const port = process.env.PORT || 8080;
 
+import allowedUsersRoute from './routes/allowed-users-route.js'
 import authRoute from './routes/auth-route.js';
-import shoppingListRoute from './routes/shopping-list-controller.js';
+import entityRoute from './routes/entity-route.js';
+import shoppingListRoute from './routes/shopping-list-route.js';
+import userRoute from './routes/user-route.js';
+
 import errorMiddleware from './middlewares/error-middleware.js';
 
 //Cors pro web
@@ -21,8 +25,11 @@ app.use(cookieParser());
 app.use(json());
 
 //Routes
+app.use('/allowed-users', allowedUsersRoute);
 app.use('/auth', authRoute);
+app.use('/entity', entityRoute);
 app.use('/shopping-list', shoppingListRoute);
+app.use('/user', userRoute);
 
 //Error middleware
 app.use(errorMiddleware);

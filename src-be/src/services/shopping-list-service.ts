@@ -10,7 +10,7 @@ class ShoppingListService {
     }
 
     async insert(model: IShoppingList) {
-        await ShoppingList.insertMany(model);
+        await ShoppingList.create(model);
     }
 }
 

@@ -1,4 +1,4 @@
-export const shoppingListGetSchema = {
+export const allowedUsersGetSchema = {
     type: 'object',
     properties: {
         id: { type: 'string' }
@@ -7,11 +7,12 @@ export const shoppingListGetSchema = {
     additionalProperties: false
 };
 
-export const shoppingListInsertSchema = {
+export const allowedUsersInsertSchema = {
     type: 'object',
     properties: {
-        name: { type: 'string' }
+        idShoppingList: { type: 'string' },
+        idUser: { type: 'string' }
     },
-    required: ['name'],
+    required: ['idShoppingList', 'idUser'],
     additionalProperties: false
 };

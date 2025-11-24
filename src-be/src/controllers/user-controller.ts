@@ -1,14 +1,11 @@
-import userService from "../services/user-service";
-import { User } from "../models/user";
+import userService from "../services/user-service.js";
 
 class UserController {
     async list(req: any, res: any, next: any) {
         try {
-            //TODO listovat podle filtru
+            const list = await userService.list();
 
-            const lists = await userService.list();
-
-            res.json(lists);
+            res.json(list);
         } catch (err) {
             next(err);
         }
@@ -17,9 +14,9 @@ class UserController {
     async get(req: any, res: any, next: any) {
         try {
             const { id, login } = req.params;
-            const list = await userService.get(id, login);
+            const model = await userService.get(id, login);
 
-            res.json(list);
+            res.json(model);
         } catch (err) {
             next(err);
         }

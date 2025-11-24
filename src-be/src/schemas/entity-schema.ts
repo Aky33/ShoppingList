@@ -1,31 +1,18 @@
-import { JSONSchemaType } from "ajv";
-
-export interface EntityFiltr {
-  idShoppingList: string;
-}
-
-export const entityFiltrSchema: JSONSchemaType<EntityFiltr> = {
+export const entityGetSchema = {
     type: 'object',
     properties: {
-        idShoppingList: { type: 'string', minimum: 1 }
+        id: { type: 'string' }
     },
-    required: ['idShoppingList'],
+    required: ['id'],
     additionalProperties: false
 };
 
-export interface EntityInput {
-    idShoppingList: string
-    description: string;
-    isDone: boolean;
-}
-
-export const entityInputSchema: JSONSchemaType<EntityInput> = {
+export const entityInsertSchema = {
     type: 'object',
     properties: {
         idShoppingList: { type: 'string' },
-        description: { type: 'string' },
-        isDone: { type: 'boolean' }
+        description: { type: 'string' }
     },
-    required: ['idShoppingList', 'description', 'isDone'],
+    required: ['idShoppingList', 'description'],
     additionalProperties: false
 };
