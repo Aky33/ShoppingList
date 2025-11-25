@@ -1,4 +1,4 @@
-export const allowedUsersGetSchema = {
+export const allowedUserGetSchema = {
     type: 'object',
     properties: {
         id: { type: 'string' }
@@ -7,7 +7,7 @@ export const allowedUsersGetSchema = {
     additionalProperties: false
 };
 
-export const allowedUsersInsertSchema = {
+export const allowedUserInsertSchema = {
     type: 'object',
     properties: {
         idShoppingList: { type: 'string' },

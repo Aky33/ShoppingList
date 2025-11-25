@@ -1,10 +1,10 @@
 import { AllowedUser } from '../models/allowed-user.js';
-import allowedUsersService  from '../services/allowed-users-service.js';
+import service  from '../services/allowed-user-service.js';
 
-class AllowedUsersController {
+class AllowedUserController {
     async list(req: any, res: any, next: any) {
         try {
-            const list = await allowedUsersService.list();
+            const list = await service.list();
             res.json(list);
         } catch (err) {
             next(err);
@@ -14,7 +14,7 @@ class AllowedUsersController {
     async get(req: any, res: any, next: any) {
         try {
             const { id } = req.params;
-            const model = await allowedUsersService.get(id);
+            const model = await service.get(id);
 
             res.json(model);
         } catch (err) {
@@ -30,7 +30,7 @@ class AllowedUsersController {
                 idUser
             });
 
-            await allowedUsersService.insert(model);
+            await service.insert(model);
             res.json(model._id);
         } catch (err) {
             next(err);
@@ -38,4 +38,4 @@ class AllowedUsersController {
     }
 }
 
-export default new AllowedUsersController();
+export default new AllowedUserController();

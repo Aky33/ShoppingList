@@ -5,7 +5,7 @@ import cookieParser from "cookie-parser";
 const app = express();
 const port = process.env.PORT || 8080;
 
-import allowedUsersRoute from './routes/allowed-users-route.js'
+import allowedUserRoute from './routes/allowed-user-route.js';
 import authRoute from './routes/auth-route.js';
 import listItemRoute from './routes/list-item-route.js';
 import shoppingListRoute from './routes/shopping-list-route.js';
@@ -25,11 +25,11 @@ app.use(cookieParser());
 app.use(json());
 
 //Routes
-app.use('/allowed-users', allowedUsersRoute);
+app.use('/allowed-users', allowedUserRoute);
 app.use('/auth', authRoute);
-app.use('/list-item', listItemRoute);
-app.use('/shopping-list', shoppingListRoute);
-app.use('/user', userRoute);
+app.use('/list-items', listItemRoute);
+app.use('/shopping-lists', shoppingListRoute);
+app.use('/users', userRoute);
 
 //Error middleware
 app.use(errorMiddleware);
