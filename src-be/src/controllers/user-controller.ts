@@ -1,22 +1,17 @@
-import userService from "../services/user-service.js";
+import { FilterQuery } from "mongoose";
+import { IUser } from "../models/user.js";
+import service from "../services/user-service.js";
 
 class UserController {
-    async list(req: any, res: any, next: any) {
+    async find(req: any, res: any, next: any) {
         try {
-            const list = await userService.list();
+            const filters: FilterQuery<IUser> = {};
+            if (req.query.id) filters["_id"] = req.query.id;
+            if (req.query.login) filters["login"] = req.query.login;
 
-            res.json(list);
-        } catch (err) {
-            next(err);
-        }
-    }
+            const models = await service.find(filters);
 
-    async get(req: any, res: any, next: any) {
-        try {
-            const { id, login } = req.params;
-            const model = await userService.get(id, login);
-
-            res.json(model);
+            res.json(models);
         } catch (err) {
             next(err);
         }

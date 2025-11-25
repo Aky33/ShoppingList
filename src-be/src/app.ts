@@ -19,10 +19,8 @@ app.use(cors({
    credentials: true 
 }))
 
-app.use(cookieParser());
-
-//Middleware na parsování json
 app.use(json());
+app.use(cookieParser());
 
 //Routes
 app.use('/allowed-users', allowedUserRoute);

@@ -3,8 +3,9 @@ import jwt, { JwtPayload, VerifyErrors } from "jsonwebtoken";
 import { config } from "../config.js";
 import { ValidationError } from "../models/errors/validation-error.js";
 
-import userService from "../services/user-service.js";
+import service from "../services/user-service.js";
 import { User } from "../models/user.js";
+import { log } from "console";
 
 //Generování tokenů
 function generateAccessToken(userId: string) {
@@ -21,8 +22,11 @@ class AuthController {
             const { login, password } = req.body;
             const model = new User({ login, password });
 
-            await userService.insert(model);
-            res.json(model._id);
+            await service.insert(model);
+            res.json({
+                id: model._id,
+                message: "Registered"
+            });
         } catch (err) {
             next(err);
         }
@@ -32,7 +36,8 @@ class AuthController {
         try {
             const { login, password } = req.body;
 
-            const user = await userService.get(null, login);
+            const users = await service.find({ login: login });
+            const user = users.pop();
             if (!user) throw new ValidationError("Invalid credentials");
 
             const match = await user.checkPassword(password);

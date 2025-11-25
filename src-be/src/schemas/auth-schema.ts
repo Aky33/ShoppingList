@@ -1,4 +1,4 @@
-export const authRegisterSchema = {
+export const registerSchema = {
     type: 'object',
     properties: {
         login: { type: 'string' },
@@ -8,11 +8,11 @@ export const authRegisterSchema = {
     additionalProperties: false
 };
 
-export const authLoginSchema = {
+export const loginSchema = {
     type: 'object',
     properties: {
-        login: { type: 'string', minimum: 1 },
-        password: { type: 'string', minimum: 1 }
+        login: { type: 'string' },
+        password: { type: 'string' }
     },
     required: ['login', 'password'],
     additionalProperties: false

@@ -1,22 +1,16 @@
-import { ShoppingList } from '../models/shopping-list.js';
-import shoppingListService  from '../services/shopping-list-service.js';
+import { FilterQuery } from 'mongoose';
+import { IShoppingList, ShoppingList } from '../models/shopping-list.js';
+import service  from '../services/shopping-list-service.js';
 
 class ShoppingListController {
-    async list(req: any, res: any, next: any) {
+    async find(req: any, res: any, next: any) {
         try {
-            const list = await shoppingListService.list();
-            res.json(list);
-        } catch (err) {
-            next(err);
-        }
-    }
+            const filters: FilterQuery<IShoppingList> = {};
+            if (req.query.id) filters["_id"] = req.query.id;
 
-    async get(req: any, res: any, next: any) {
-        try {
-            const { id } = req.params;
-            const model = await shoppingListService.get(id);
+            const models = await service.find(filters);
 
-            res.json(model);
+            res.json(models);
         } catch (err) {
             next(err);
         }
@@ -31,8 +25,22 @@ class ShoppingListController {
                 isDeleted: false
             });
 
-            await shoppingListService.insert(model);
-            res.json(model._id);
+            await service.insert(model);
+            res.json({
+                id: model._id,
+                message: "Created"
+            });
+        } catch (err) {
+            next(err);
+        }
+    }
+
+    async delete(req: any, res: any, next: any) {
+        try {
+            const { id } = req.body;
+
+            await service.delete(id);
+            res.json({message: "Deleted"});
         } catch (err) {
             next(err);
         }

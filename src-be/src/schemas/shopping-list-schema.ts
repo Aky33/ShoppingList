@@ -1,17 +1,26 @@
-export const shoppingListGetSchema = {
+export const findSchema = {
     type: 'object',
     properties: {
         id: { type: 'string' }
     },
-    required: ['id'],
+    required: [],
     additionalProperties: false
 };
 
-export const shoppingListInsertSchema = {
+export const insertSchema = {
     type: 'object',
     properties: {
         name: { type: 'string' }
     },
     required: ['name'],
+    additionalProperties: false
+};
+
+export const deleteSchema = {
+    type: 'object',
+    properties: {
+        id: { type: 'string' }
+    },
+    required: ['id'],
     additionalProperties: false
 };

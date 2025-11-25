@@ -1,16 +1,17 @@
+import { FilterQuery } from 'mongoose';
 import { IShoppingList, ShoppingList } from '../models/shopping-list.js';
 
 class ShoppingListService {
-    async list(): Promise<IShoppingList[]> {
-        return await ShoppingList.find();
-    }
-
-    async get(id: string): Promise<IShoppingList | null> {
-        return await ShoppingList.findById(id);
+    async find(filters: FilterQuery<IShoppingList>): Promise<IShoppingList[]> {
+        return await ShoppingList.find(filters);
     }
 
     async insert(model: IShoppingList) {
         await ShoppingList.create(model);
+    }
+
+    async delete(id: string) {
+        await ShoppingList.findByIdAndDelete(id);
     }
 }
 

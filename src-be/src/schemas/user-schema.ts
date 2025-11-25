@@ -1,4 +1,4 @@
-export const userGetSchema = {
+export const findSchema = {
     type: 'object',
     properties: {
         id: { type: 'string' },
