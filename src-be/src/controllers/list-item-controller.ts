@@ -1,10 +1,10 @@
-import { Entity } from '../models/entity.js';
-import entityService  from '../services/entity-service.js';
+import { ListItem } from '../models/list-item.js';
+import service  from '../services/list-item-service.js';
 
-class EntityController {
+class ListItemController {
     async list(req: any, res: any, next: any) {
         try {
-            const list = await entityService.list();
+            const list = await service.list();
             res.json(list);
         } catch (err) {
             next(err);
@@ -14,7 +14,7 @@ class EntityController {
     async get(req: any, res: any, next: any) {
         try {
             const { id } = req.params;
-            const model = await entityService.get(id);
+            const model = await service.get(id);
 
             res.json(model);
         } catch (err) {
@@ -25,13 +25,13 @@ class EntityController {
     async insert(req: any, res: any, next: any) {
         try {
             const { idShoppingList, description } = req.body;
-            const model = new Entity({
+            const model = new ListItem({
                 idShoppingList,
                 description,
                 isDone: false
             });
 
-            await entityService.insert(model);
+            await service.insert(model);
             res.json(model._id);
         } catch (err) {
             next(err);
@@ -39,4 +39,4 @@ class EntityController {
     }
 }
 
-export default new EntityController();
+export default new ListItemController();

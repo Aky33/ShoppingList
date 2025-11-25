@@ -7,7 +7,7 @@ const port = process.env.PORT || 8080;
 
 import allowedUsersRoute from './routes/allowed-users-route.js'
 import authRoute from './routes/auth-route.js';
-import entityRoute from './routes/entity-route.js';
+import listItemRoute from './routes/list-item-route.js';
 import shoppingListRoute from './routes/shopping-list-route.js';
 import userRoute from './routes/user-route.js';
 
@@ -27,7 +27,7 @@ app.use(json());
 //Routes
 app.use('/allowed-users', allowedUsersRoute);
 app.use('/auth', authRoute);
-app.use('/entity', entityRoute);
+app.use('/list-item', listItemRoute);
 app.use('/shopping-list', shoppingListRoute);
 app.use('/user', userRoute);
 
@@ -37,6 +37,8 @@ app.use(errorMiddleware);
 //Připojení k db
 connectDB();
 
-app.listen(port, () => {
-    console.log(`Server runs on http://localhost:${port}`);
-});
+try {
+    app.listen(port, () => console.log(`Server runs on http://localhost:${port}`));
+} catch (err) {
+    console.error(err);
+}

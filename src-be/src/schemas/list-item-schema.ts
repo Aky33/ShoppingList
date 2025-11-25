@@ -1,4 +1,4 @@
-export const entityGetSchema = {
+export const listItemGetSchema = {
     type: 'object',
     properties: {
         id: { type: 'string' }
@@ -7,7 +7,7 @@ export const entityGetSchema = {
     additionalProperties: false
 };
 
-export const entityInsertSchema = {
+export const listItemInsertSchema = {
     type: 'object',
     properties: {
         idShoppingList: { type: 'string' },
