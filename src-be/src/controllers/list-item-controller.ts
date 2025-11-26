@@ -37,12 +37,12 @@ class ListItemController {
 
     async update(req: any, res: any, next: any) {
         try {
-            const { id, idShoppingList, description } = req.body;
+            const { id, idShoppingList, description, isDone } = req.body;
             const model = new ListItem({
                 _id: id,
                 idShoppingList,
                 description,
-                isDone: false
+                isDone
             });
 
             await service.update(model, req.user.id);

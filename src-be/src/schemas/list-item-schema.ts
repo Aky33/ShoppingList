@@ -22,9 +22,10 @@ export const updateSchema = {
     properties: {
         id: { type: 'string' },
         idShoppingList: { type: 'string' },
-        description: { type: 'string' }
+        description: { type: 'string' },
+        isDone: {type: 'string'}
     },
-    required: ['id', 'idShoppingList', 'description'],
+    required: ['id', 'idShoppingList', 'description',  'isDone'],
     additionalProperties: false
 };
 
