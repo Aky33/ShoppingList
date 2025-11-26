@@ -23,7 +23,7 @@ class AllowedUserController {
                 idUser
             });
 
-            await service.insert(model);
+            await service.insert(model, req.user.id);
             res.json({
                 id: model._id,
                 message: "Created"
@@ -37,7 +37,7 @@ class AllowedUserController {
         try {
             const { id } = req.body;
 
-            await service.delete(id);
+            await service.delete(id, req.user.id);
             res.json({message: "Deleted"});
         } catch (err) {
             next(err);

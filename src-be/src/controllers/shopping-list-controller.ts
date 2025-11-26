@@ -21,7 +21,7 @@ class ShoppingListController {
             const { name } = req.body;
             const model = new ShoppingList({
                 name,
-                idOwner:req.user.id,
+                idOwner: req.user.id,
                 isDeleted: false
             });
 
@@ -39,7 +39,7 @@ class ShoppingListController {
         try {
             const { id } = req.body;
 
-            await service.delete(id);
+            await service.delete(id, req.user.id);
             res.json({message: "Deleted"});
         } catch (err) {
             next(err);

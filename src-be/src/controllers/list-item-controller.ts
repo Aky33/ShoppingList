@@ -25,7 +25,7 @@ class ListItemController {
                 isDone: false
             });
 
-            await service.insert(model);
+            await service.insert(model, req.user.id);
             res.json({
                 id: model._id,
                 message: "Created"
@@ -45,7 +45,7 @@ class ListItemController {
                 isDone: false
             });
 
-            await service.update(model);
+            await service.update(model, req.user.id);
             res.json({message: "Updated"});
         } catch (err) {
             next(err);
@@ -56,7 +56,7 @@ class ListItemController {
         try {
             const { id } = req.body;
 
-            await service.delete(id);
+            await service.delete(id, req.user.id);
             res.json({message: "Deleted"});
         } catch (err) {
             next(err);
