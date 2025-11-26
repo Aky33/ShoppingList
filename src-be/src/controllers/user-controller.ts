@@ -10,6 +10,7 @@ class UserController {
             if (req.query.login) filters["login"] = req.query.login;
 
             const models = await service.find(filters);
+            models.map(model => model.password = "*****")
 
             res.json(models);
         } catch (err) {
