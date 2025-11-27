@@ -1,0 +1,8 @@
+{
+    "title": "Log In",
+    "name": "Username",
+    "password": "Password",
+    "login": "Log In",
+    "alertInsertLogin": "Insert Username!",
+    "alertInsertPassword": "Insert Password!"
+}

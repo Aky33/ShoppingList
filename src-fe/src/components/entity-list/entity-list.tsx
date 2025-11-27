@@ -33,7 +33,7 @@ const EntityList = ({ entities, setEntitiesData }: Props) => {
             {entities.map((item) => (
                 <div className={`btn btn-light mb-1 col-12 d-flex justify-content-between align-items-center ${item.isDone ? "text-decoration-line-through" : ""}`} onClick={() => update(item)}>
                     <span>{item.description}</span>
-                    <Button className="btn btn-danger" size="sm" onClick={() => remove(item)}><FaTrash /></Button>
+                    <Button className="btn btn-danger" onClick={() => remove(item)}><FaTrash /></Button>
                 </div>
             ))}
         </div>

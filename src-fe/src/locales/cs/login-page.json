@@ -1,0 +1,8 @@
+{
+    "title": "Přihlášení",
+    "name": "Jméno",
+    "password": "Heslo",
+    "login": "Přihlásit",
+    "alertInsertLogin": "Vlož uživatelské jméno!",
+    "alertInsertPassword": "Vlož heslo!"
+}

@@ -1,5 +1,5 @@
 import {  useState } from "react"
-//import { useParams } from "react-router-dom"
+import { useParams } from "react-router-dom"
 import { Container, Card, Button, Modal, Form } from "react-bootstrap"
 import type { FormEvent } from "react"
 import { FaPlus } from "react-icons/fa"
@@ -17,8 +17,8 @@ import AllowedUsersList from "../../components/allowed-users/allowed-users-list"
 import AllowedUsersListAddForm from "../../components/allowed-users/allowed-users-list-add-form"
 
 type Props = {
-    shoppingListData: ShoppingListOutputType
-    setShoppingListData: React.Dispatch<React.SetStateAction<ShoppingListOutputType>>
+    shoppingListsData: ShoppingListOutputType[]
+    setShoppingListsData: React.Dispatch<React.SetStateAction<ShoppingListOutputType[]>>
     entitiesData: EntityOutputType[]
     setEntitiesData: React.Dispatch<React.SetStateAction<EntityOutputType[]>>
     allowedUsers: AllowedUserOutputType[]
@@ -26,10 +26,14 @@ type Props = {
     users: UserOutputType[]
 }
 
-const ShoppingListItem = ({shoppingListData, setShoppingListData, entitiesData, setEntitiesData, allowedUsers, setAllowedUsers, users}: Props) => {
+const ShoppingListItem = ({shoppingListsData, setShoppingListsData, entitiesData, setEntitiesData, allowedUsers, setAllowedUsers, users}: Props) => {
     const { t } = useTranslation("shoppingListItem");
 
-    //const params = useParams<{id: string}>()
+    const params = useParams<{id: string}>()
+    const shoppingListData = shoppingListsData.filter(item => item._id == params.id)[0]
+    entitiesData = entitiesData.filter(item => item.idShoppingList == shoppingListData._id)
+    allowedUsers = allowedUsers.filter(item => item.idShoppingList == shoppingListData._id)
+
     //const {data: shoppingListData, refetch: shoppingListRefetch, error: shoppingListError} = useFetch<ShoppingListOutputType>('http://localhost:8080/shopping-list/get' + params.id)
     //const {data: entitiesData, refetch: entitiesRefetch, error: entitiesError} = useFetch<>('http://localhost:8080/shopping-list/get' + params.id)
 
@@ -46,7 +50,12 @@ const ShoppingListItem = ({shoppingListData, setShoppingListData, entitiesData, 
     const endEditMode = async (e: FormEvent) => {
         e.preventDefault()
 
-        setShoppingListData({ ...shoppingListData, name: shoppingListName })
+        setShoppingListsData(prev => 
+            prev.map(item =>
+                item._id == shoppingListData._id ? { ...item, name: shoppingListName } : item
+            )
+        )
+
         setEditMode(false)
     }
 
@@ -97,7 +106,7 @@ const ShoppingListItem = ({shoppingListData, setShoppingListData, entitiesData, 
                                 idShoppingList={shoppingListData._id}
                                 onInsert={(idShoppingList: string, description: string) => {
                                     entitiesData.push({
-                                        _id: "xxx",
+                                        _id: (entitiesData.length +1).toString(),
                                         idShoppingList: idShoppingList,
                                         description: description,
                                         isDone: false
@@ -136,7 +145,7 @@ const ShoppingListItem = ({shoppingListData, setShoppingListData, entitiesData, 
                                 users={users}
                                 onInsert={(idShoppingList: string, idUser: string) => {
                                     allowedUsers.push({
-                                        _id: "xxx",
+                                        _id: (allowedUsers.length +1).toString(),
                                         idShoppingList: idShoppingList,
                                         idUser: idUser
                                     });

@@ -1,6 +1,7 @@
 import React from 'react'
 import ReactDom from 'react-dom/client'
 import { BrowserRouter } from 'react-router-dom'
+import { AuthProvider } from './auth/auth-context.tsx'
 
 import App from './App.tsx'
 import 'bootstrap/dist/css/bootstrap.min.css'
@@ -11,7 +12,9 @@ import './i18n.ts'    //import kvůli inicializaci
 ReactDom.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
     <BrowserRouter>
-      <App />
+      <AuthProvider>
+        <App />
+      </AuthProvider>
     </BrowserRouter>
   </React.StrictMode>
 )

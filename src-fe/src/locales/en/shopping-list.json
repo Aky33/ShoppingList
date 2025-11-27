@@ -1,0 +1,11 @@
+{
+    "title": "Shopping lists",
+    "empty": "Nothing to see",
+    "showOnlyNotDeleted": "Show only not archivated",
+    "add": "Add",
+    "deleteModalTitle": "Delete?",
+    "deleteModalMessage": "Do you wish to delete selected item?",
+    "deleteModalConfirm": "Delete",
+    "deleteModalCancel": "Cancel",
+    "onlyOwnerCanDelete": "Shopping list can be deleted only by owner"
+}

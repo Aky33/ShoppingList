@@ -1,0 +1,11 @@
+{
+    "title": "Nákupní seznamy",
+    "empty": "Nic tu není",
+    "showOnlyNotDeleted": "Zobrazit pouze nearchivované",
+    "add": "Přidat",
+    "deleteModalTitle": "Smazat?",
+    "deleteModalMessage": "Opravdu chcete smazat zvolenou položku?",
+    "deleteModalConfirm": "Smazat",
+    "deleteModalCancel": "Zrušit",
+    "onlyOwnerCanDelete": "Seznam může smazat pouze vlastník"
+}
