@@ -17,9 +17,10 @@ const EntityListAddForm = ({ idShoppingList, onInsert } : Props) => {
 
     const insert = async (e: FormEvent) => {
         e.preventDefault()
-
+        
         //const newEntity: EntityInputType = { idShoppingList, description }
         onInsert(idShoppingList, description)
+        setDescription('')
 
         //const res = await sendData(newList)
 

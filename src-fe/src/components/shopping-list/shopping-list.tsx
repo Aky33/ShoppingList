@@ -7,6 +7,7 @@ import { useState } from "react"
 import { useTranslation } from "react-i18next";
 import { useAuth } from "../../hooks/use-auth"
 import type { UserOutputType } from "../../types/user-output-type"
+import { useError } from "../../hooks/use-error"
 
 type Props = {
     lists: ShoppingListOutputType[]
@@ -17,6 +18,7 @@ type Props = {
 const ShoppingList = ({ lists, setShoppingListsData, users }: Props) => {
     const { t } = useTranslation("shoppingList");
     const { user: currentAuthenticatedUser } = useAuth();
+    const { setError } = useError();
 
     const [listToDelete, setListToDelete] = useState<ShoppingListOutputType | null>(null)
     const [showDeleteConfirmModal, setShowDeleteConfirmModal] = useState(false)
@@ -42,8 +44,10 @@ const ShoppingList = ({ lists, setShoppingListsData, users }: Props) => {
     const remove = async(list: ShoppingListOutputType) => {
         const current = users.filter(item => item.login == currentAuthenticatedUser?.login)[0]
 
-        if (current._id != list.idOwner)
+        if (current._id != list.idOwner) {
+            setError(new Error(t("onlyOwnerCanDelete")))
             throw new Error(t("onlyOwnerCanDelete"))
+        }
 
         setShoppingListsData(prev => {
             let arr: ShoppingListOutputType[] = []

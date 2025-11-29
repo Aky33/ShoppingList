@@ -105,12 +105,18 @@ const ShoppingListItem = ({shoppingListsData, setShoppingListsData, entitiesData
                             <EntityListAddForm 
                                 idShoppingList={shoppingListData._id}
                                 onInsert={(idShoppingList: string, description: string) => {
-                                    entitiesData.push({
-                                        _id: (entitiesData.length +1).toString(),
-                                        idShoppingList: idShoppingList,
-                                        description: description,
-                                        isDone: false
-                                    });
+                                    setEntitiesData(prev => {
+                                        let arr = prev
+
+                                        arr.push({
+                                            _id: (entitiesData.length +1).toString(),
+                                            idShoppingList: idShoppingList,
+                                            description: description,
+                                            isDone: false
+                                        });
+
+                                        return arr
+                                    })
 
                                     //refetch()
                                     closeAddModal()
