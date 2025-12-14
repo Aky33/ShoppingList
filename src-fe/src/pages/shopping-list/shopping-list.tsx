@@ -1,25 +1,27 @@
 import { useState } from "react"
-import { Container, Card, /*Alert,*/ Button, Modal } from "react-bootstrap"
+import { Container, Card, Button, Modal, Alert } from "react-bootstrap"
 import { FaPlus } from "react-icons/fa"
 import { useTranslation } from "react-i18next";
 
-//import { useFetch } from "../../hooks/UseFetch"
+import { useFetch } from "../../hooks/use-fetch"
 import ShoppingList from "../../components/shopping-list/shopping-list"
 import ShoppingListAddForm from "../../components/shopping-list/shopping-list-add-form"
 
 import type { ShoppingListOutputType } from "../../types/shopping-list-output-type"
-import type { UserOutputType } from "../../types/user-output-type";
+import type { ShoppingListInputType } from "../../types/shopping-list-input-type";
+import usePost from "../../hooks/use-post";
+import type { ShoppingListUpdateType } from "../../types/shopping-list-update-type";
+import usePut from "../../hooks/use-put";
+import useDelete from "../../hooks/use-delete";
 
-type Props = {
-    shoppingListsData: ShoppingListOutputType[]
-    setShoppingListsData: React.Dispatch<React.SetStateAction<ShoppingListOutputType[]>>
-    users: UserOutputType[]
-}
-
-const ShoppingListPage = ({shoppingListsData, setShoppingListsData, users}: Props) => {
+const ShoppingListPage = () => {
     const { t } = useTranslation("shoppingList");
 
-    //const {data, refetch, error} = useFetch<ShoppingListOutputType[]>('http://localhost:8080/shopping-list/list')
+    const {data, refetch, error} = useFetch<ShoppingListOutputType[]>('http://localhost:8080/shopping-lists/find')
+    const shoppingListInsert = usePost<ShoppingListInputType>('http://localhost:8080/shopping-lists/insert')
+    const updateShoppingList = usePut<ShoppingListUpdateType>('http://localhost:8080/shopping-lists/update')
+    const deleteShoppingList = useDelete('http://localhost:8080/shopping-lists/delete')
+
     const [showOnlyNotDeleted, setShowOnlyNotDeleted] = useState(true)
     const [showAddModal, setShowAddModal] = useState(false)
 
@@ -34,9 +36,25 @@ const ShoppingListPage = ({shoppingListsData, setShoppingListsData, users}: Prop
                     <Card.Title>{t("title")}</Card.Title>
                 </Card.Header>
                 <Card.Body>
-                    {/*error && <Alert variant="danger">{error}</Alert>*/}
-                    {shoppingListsData && shoppingListsData.length == 0 && <div>{t("empty")}</div>}
-                    {shoppingListsData && <ShoppingList lists={shoppingListsData.filter(item => (showOnlyNotDeleted && !item.isDeleted) || !showOnlyNotDeleted)} setShoppingListsData={setShoppingListsData} users={users} />}
+                    {error && <Alert variant="danger">{error}</Alert>}
+                    {data && data.length == 0 && <div>{t("empty")}</div>}
+                    {data && <ShoppingList 
+                        lists={data.filter(item => (showOnlyNotDeleted && !item.isDeleted) || !showOnlyNotDeleted)}
+                        update={(list: ShoppingListOutputType) => {
+                            updateShoppingList({
+                                id: list._id,
+                                idOwner: list.idOwner,
+                                name: list.name,
+                                isDeleted: !list.isDeleted
+                            })
+
+                            refetch()
+                        }}
+                        remove={(list: ShoppingListOutputType) => {
+                            deleteShoppingList(list._id)
+                            refetch()
+                        }} 
+                    />}
                 </Card.Body>
                 <Card.Footer>
                     <div className="d-flex justify-content-between align-items-center">
@@ -56,14 +74,13 @@ const ShoppingListPage = ({shoppingListsData, setShoppingListsData, users}: Prop
                         <Modal.Body>
                             <ShoppingListAddForm 
                                 onInsert={(name: string) => {
-                                    shoppingListsData.push({
-                                        _id: (shoppingListsData.length +1).toString(),
-                                        idOwner: "TODO vůbec netuším jak to sem dostat bez be",
-                                        name,
-                                        isDeleted: false
-                                    });
-                                    
-                                    //refetch()
+                                    const newShoppingList: ShoppingListInputType = {
+                                        name
+                                    }
+
+                                    shoppingListInsert(newShoppingList)
+
+                                    refetch()
                                     closeAddModal()
                                 }} 
                             />

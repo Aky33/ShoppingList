@@ -5,20 +5,15 @@ import { FaEye, FaArchive, FaTrash } from "react-icons/fa"
 import ConfirmModal from "../common/confirm-modal"
 import { useState } from "react"
 import { useTranslation } from "react-i18next";
-import { useAuth } from "../../hooks/use-auth"
-import type { UserOutputType } from "../../types/user-output-type"
-import { useError } from "../../hooks/use-error"
 
 type Props = {
     lists: ShoppingListOutputType[]
-    setShoppingListsData: React.Dispatch<React.SetStateAction<ShoppingListOutputType[]>>
-    users: UserOutputType[]
+    update: (list: ShoppingListOutputType) => void
+    remove: (list: ShoppingListOutputType) => void
 }
 
-const ShoppingList = ({ lists, setShoppingListsData, users }: Props) => {
+const ShoppingList = ({ lists, update, remove }: Props) => {
     const { t } = useTranslation("shoppingList");
-    const { user: currentAuthenticatedUser } = useAuth();
-    const { setError } = useError();
 
     const [listToDelete, setListToDelete] = useState<ShoppingListOutputType | null>(null)
     const [showDeleteConfirmModal, setShowDeleteConfirmModal] = useState(false)
@@ -33,32 +28,18 @@ const ShoppingList = ({ lists, setShoppingListsData, users }: Props) => {
         setShowDeleteConfirmModal(false)
     }
 
-    const update = async(list: ShoppingListOutputType) => {
-        setShoppingListsData(prev =>
-            prev.map(item => 
-                item._id == list._id ? { ...item, isDeleted: !list.isDeleted } : item
-            )
-        )
+    /*const update = async(list: ShoppingListOutputType) => {
+        updateShoppingList({
+            id: list._id,
+            idOwner: list.idOwner,
+            name: list.name,
+            isDeleted: !list.isDeleted
+        })
     }
     
     const remove = async(list: ShoppingListOutputType) => {
-        const current = users.filter(item => item.login == currentAuthenticatedUser?.login)[0]
-
-        if (current._id != list.idOwner) {
-            setError(new Error(t("onlyOwnerCanDelete")))
-            throw new Error(t("onlyOwnerCanDelete"))
-        }
-
-        setShoppingListsData(prev => {
-            let arr: ShoppingListOutputType[] = []
-
-            prev.forEach(item => {
-                if (item._id != list._id) arr.push(item)
-            })
-
-            return arr
-        })
-    }
+        deleteShoppingList(list._id)
+    }*/
 
     return (
         <div>
