@@ -1,7 +1,7 @@
 import { describe, beforeAll, afterEach, afterAll, it, expect, jest } from '@jest/globals';
 
 import listItemService from '../../src/services/list-item-service.js';
-import { ListItem } from '../../src/models/list-item.js';
+import { IListItem, ListItem } from '../../src/models/list-item.js';
 
 import shoppingListService from '../../src/services/shopping-list-service.js';
 import { AuthError } from '../../src/models/errors/auth-error.js';
@@ -34,8 +34,8 @@ describe('ListItemService – integration', () => {
     // ---------------- FIND ----------------
     it('najde položky podle filtru', async () => {
         await ListItem.create([
-            { description: 'Milk', idShoppingList: shoppingListId },
-            { description: 'Bread', idShoppingList: shoppingListId },
+            { description: 'Milk', idShoppingList: shoppingListId, isDone: false },
+            { description: 'Bread', idShoppingList: shoppingListId, isDone: false },
         ]);
 
         const items = await listItemService.find({ description: 'Milk' });
@@ -51,7 +51,7 @@ describe('ListItemService – integration', () => {
             .mockReturnValue(Promise.resolve(true));
 
         await listItemService.insert(
-            { description: 'Eggs', idShoppingList: shoppingListId } as any,
+            { description: 'Eggs', idShoppingList: shoppingListId, isDone: false } as IListItem,
             ownerId
         );
 
@@ -68,13 +68,68 @@ describe('ListItemService – integration', () => {
 
         await expect(
             listItemService.insert(
-                { description: 'Eggs', idShoppingList: shoppingListId } as any,
+                { description: 'Eggs', idShoppingList: shoppingListId, isDone: false } as IListItem,
                 userId
             )
         ).rejects.toBeInstanceOf(AuthError);
 
         expect(await ListItem.countDocuments()).toBe(0);
     });
+
+    // ---------------- UPDATE ----------------
+    it('aktualizuje položku, pokud je uživatel owner', async () => {
+        jest
+            .spyOn(shoppingListService, 'isOwner')
+            .mockResolvedValue(true);
+
+        const item = await ListItem.create({
+            description: 'Milk',
+            idShoppingList: shoppingListId,
+            isDone: false
+        });
+
+        await listItemService.update(
+            {
+                _id: item._id,
+                description: 'Milk (updated)',
+                isDone: true
+            } as IListItem,
+            ownerId
+        );
+
+        const updated = await ListItem.findById(item._id);
+
+        expect(updated).not.toBeNull();
+        expect(updated!.description).toBe('Milk (updated)');
+        expect(updated!.isDone).toBe(true);
+    });
+
+    it('neaktualizuje položku, pokud uživatel není owner', async () => {
+        jest
+            .spyOn(shoppingListService, 'isOwner')
+            .mockResolvedValue(false);
+
+        const item = await ListItem.create({
+            description: 'Butter',
+            idShoppingList: shoppingListId,
+            isDone: false
+        });
+
+        await expect(
+            listItemService.update(
+                {
+                    _id: item._id,
+                    description: 'SHOULD NOT UPDATE'
+                } as IListItem,
+                userId
+            )
+        ).rejects.toBeInstanceOf(AuthError);
+
+        const unchanged = await ListItem.findById(item.id);
+
+        expect(unchanged!.description).toBe('Butter');
+    });
+
 
     // ---------------- DELETE ----------------
     it('smaže položku, pokud je owner', async () => {
@@ -85,6 +140,7 @@ describe('ListItemService – integration', () => {
         const item = await ListItem.create({
             description: 'Butter',
             idShoppingList: shoppingListId,
+            isDone: false
         });
 
         await listItemService.delete(item.id, ownerId);
