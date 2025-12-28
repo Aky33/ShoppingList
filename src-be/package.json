@@ -4,8 +4,9 @@
   "description": "Projekt pro Bekendové systémy",
   "type": "module",
   "scripts": {
-    "start": "node --loader ts-node/esm src/app.ts",
+    "dev": "tsx src/app.ts",
     "build": "tsc",
+    "start": "node dist/app.js",
     "test": "jest",
     "test:watch": "jest --watch",
     "test:coverage": "jest --coverage"
@@ -40,6 +41,7 @@
     "mongodb-memory-server": "^11.0.1",
     "ts-jest": "^29.4.6",
     "ts-node": "^10.9.2",
+    "tsx": "^4.21.0",
     "typescript": "^5.9.3"
   }
 }
