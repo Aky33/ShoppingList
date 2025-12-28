@@ -11,7 +11,7 @@ class AllowedUserService {
     }
 
     async insert(model: IAllowedUser, userId: string) {
-        if (!shoppingListService.isOwner(userId, model.idShoppingList))
+        if (!await shoppingListService.isOwner(userId, model.idShoppingList))
             throw new AuthError("Only owner can do this!");
 
         await AllowedUser.create(model);

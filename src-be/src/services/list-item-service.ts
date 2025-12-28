@@ -11,17 +11,18 @@ class ListItemService {
     }
 
     async insert(model: IListItem, userId: string) {
-        if (!shoppingListService.isOwner(userId, model.idShoppingList))
+        if (!await shoppingListService.isOwner(userId, model.idShoppingList)) {
             throw new AuthError("Only owner can do this!");
+        }
 
         await ListItem.create(model);
     }
 
     async update(model: IListItem, userId: string) {
-        if (!shoppingListService.isOwner(userId, model.idShoppingList as string))
+        if (!await shoppingListService.isOwner(userId, model.idShoppingList as string))
             throw new AuthError("Only owner can do this!");
 
-        await ListItem.findByIdAndUpdate(model);
+        await ListItem.findByIdAndUpdate(model._id, model);
     }
 
     async delete(id: string, userId: string) {
@@ -30,7 +31,7 @@ class ListItemService {
         if (!model)
             throw new ValidationError("Can't delete non-existent item");
 
-        if (!shoppingListService.isOwner(userId, model.idShoppingList))
+        if (!await shoppingListService.isOwner(userId, model.idShoppingList))
             throw new AuthError("Only owner can do this!");
         
         await ListItem.findByIdAndDelete(id);
