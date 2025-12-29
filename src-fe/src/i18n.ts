@@ -8,6 +8,7 @@ import enShoppingList from "./locales/en/shopping-list.json";
 import enShoppingListItem from "./locales/en/shopping-list-item.json";
 import enShoppingListAddForm from "./locales/en/shopping-list-add-form.json";
 import enEntityListAddForm from "./locales/en/entity-list-add-form.json";
+import enAllowedUsersListAddForm from "./locales/en/allowed-users-list-add-form.json";
 
 // CS překlady
 import csLoginPage from "./locales/cs/login-page.json";
@@ -16,6 +17,7 @@ import csShoppingList from "./locales/cs/shopping-list.json";
 import csShoppingListItem from "./locales/cs/shopping-list-item.json";
 import csShoppingListAddForm from "./locales/cs/shopping-list-add-form.json";
 import csEntityListAddForm from "./locales/cs/entity-list-add-form.json";
+import csAllowedUsersListAddForm from "./locales/cs/allowed-users-list-add-form.json";
 
 i18n
     .use(initReactI18next)
@@ -27,7 +29,8 @@ i18n
                 shoppingList: enShoppingList,
                 shoppingListItem: enShoppingListItem,
                 shoppingListAddForm: enShoppingListAddForm,
-                entityListAddForm: enEntityListAddForm
+                entityListAddForm: enEntityListAddForm,
+                allowedUsersListAddForm: enAllowedUsersListAddForm
             },
             cs: {
                 loginPage: csLoginPage,
@@ -35,12 +38,13 @@ i18n
                 shoppingList: csShoppingList,
                 shoppingListItem: csShoppingListItem,
                 shoppingListAddForm: csShoppingListAddForm,
-                entityListAddForm: csEntityListAddForm
+                entityListAddForm: csEntityListAddForm,
+                allowedUsersListAddForm: csAllowedUsersListAddForm
             },
         },
         lng: "cs",
         fallbackLng: "en",
-        ns: ["loginPage", "navbar", "shoppingList", "shoppingListItem", "shoppingListAddForm", "entityListAddForm"], // jména namespaces
+        ns: ["loginPage", "navbar", "shoppingList", "shoppingListItem", "shoppingListAddForm", "entityListAddForm", "allowedUsersListAddForm"], // jména namespaces
         defaultNS: "navbar", // výchozí
         interpolation: { escapeValue: false },
     });

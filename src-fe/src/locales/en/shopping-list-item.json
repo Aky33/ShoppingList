@@ -1,5 +1,8 @@
 {
     "empty": "Nothing here",
     "add": "Add new entity to shopping list",
-    "edit": "Edit"
+    "edit": "Edit",
+    "allowed_users": "Allowed Users",
+    "add_allowed_user": "Add Allowed User",
+    "show_only_not_done": "Show Only Not Done"
 }

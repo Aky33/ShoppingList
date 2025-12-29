@@ -96,7 +96,7 @@ const ShoppingListItem = () => {
                         <span>{shoppingList.name}</span>
                         {!editMode && <Button className="btn btn-secondary" onClick={startEditMode}>{t("edit")}</Button>}       {/*Při první příležitosti vyrveme pryč, je to ohavnost, ale úkol to vyžaduje*/}
                         {editMode && <Form onSubmit={endEditMode}><Form.Control id="name" type="text" value={shoppingListName!} onChange={(e) => setShoppingListName(e.target.value)} required /><Button variant="btn btn-secondary" type="submit">{t("edit")}</Button></Form>}
-                        <Button className="btn btn-secondary" onClick={openAllowedUsersModal}>Uživatelé</Button>
+                        <Button className="btn btn-secondary" onClick={openAllowedUsersModal}>{t("allowed_users")}</Button>
                     </Card.Title> 
                 </Card.Header>
                 <Card.Body>
@@ -129,7 +129,7 @@ const ShoppingListItem = () => {
                     <div className="d-flex justify-content-between align-items-center">
                         <div className="form-check form-switch">
                             <input className="form-check-input" type="checkbox" checked={showOnlyNotDone} onChange={() => setShowOnlyNotDone(!showOnlyNotDone)} id="showOnlyNotDoneSwitch" />
-                            <label className="form-check-label" htmlFor="showOnlyNotDoneSwitch">Ukaž pouze nedokončené</label>
+                            <label className="form-check-label" htmlFor="showOnlyNotDoneSwitch">{t("show_only_not_done")}</label>
                         </div>
                         <Button onClick={openAddModal}>
                             <FaPlus />
@@ -158,7 +158,7 @@ const ShoppingListItem = () => {
 
                     <Modal show={showAllowedUsersModal} onHide={closeAllowedUsersModal}>
                         <Modal.Header closeButton>
-                            <Modal.Title>Uživatelé</Modal.Title>
+                            <Modal.Title>{t("allowed_users")}</Modal.Title>
                         </Modal.Header>
                         <Modal.Body>
                             {allowedUsers && <AllowedUsersList allowedUsers={allowedUsers} remove={
@@ -179,7 +179,7 @@ const ShoppingListItem = () => {
 
                     <Modal show={showAddAllowedUsersModal} onHide={closeAddAllowedUsersModal}>
                         <Modal.Header closeButton>
-                            <Modal.Title>Přidej povoleného uživatele</Modal.Title>
+                            <Modal.Title>{t("add_allowed_user")}</Modal.Title>
                         </Modal.Header>
                         <Modal.Body>
                             <AllowedUsersListAddForm 

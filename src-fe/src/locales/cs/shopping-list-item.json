@@ -1,5 +1,8 @@
 {
     "empty": "Nic tu není",
     "add": "Přidání nové položky do seznamu",
-    "edit": "Editovat"
+    "edit": "Editovat",
+    "allowed_users": "Povolení uživatelé",
+    "add_allowed_user": "Přidat povoleného uživatele",
+    "show_only_not_done": "Zobrazit pouze nedokončené"
 }

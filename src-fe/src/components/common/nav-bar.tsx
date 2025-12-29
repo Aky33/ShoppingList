@@ -4,6 +4,7 @@ import { Button, Container, Nav, Navbar, NavbarCollapse, NavbarToggle, NavLink }
 import { FaSignOutAlt } from "react-icons/fa";
 
 import { useAuth } from "../../hooks/use-auth";
+import LanguageSwitcher from "./language-switcher";
 
 const NavBar = () => {
     const { t } = useTranslation("navbar");
@@ -20,8 +21,9 @@ const NavBar = () => {
                 </NavbarCollapse>
                 <span>
                     {user?.login}
-                    {user && <Button className="btn btn-danger" style={{ marginLeft: 10 }} size="sm" onClick={logout}><FaSignOutAlt /></Button>}
+                    {user && <Button className="btn btn-danger" style={{ marginLeft: 5 }} size="sm" onClick={logout}><FaSignOutAlt /></Button>}
                 </span>
+                <LanguageSwitcher />
             </Container>
         </Navbar>
     )
