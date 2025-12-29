@@ -44,8 +44,8 @@ const ShoppingList = ({ lists, update, remove }: Props) => {
     return (
         <div>
             {lists.map((item) => (
-                <div className={`btn btn-light mb-1 col-12 d-flex justify-content-between align-items-center ${item.isDeleted ? "text-decoration-line-through" : ""}`}>
-                    <span>{item.name}</span>
+                <div className={`btn mb-1 col-12 d-flex justify-content-between align-items-center ${item.isDeleted ? "text-decoration-line-through" : ""}`}>
+                    <span>{item.name} [{item.countItems? item.countItems : 0}]</span>
                     <span>
                         <Link className="btn btn-secondary sm" to={`/shopping-list/${item._id}`}><FaEye /></Link>
                         {!item.isDeleted && <Button className="btn btn-secondary" onClick={() => update(item)}><FaArchive /></Button>}

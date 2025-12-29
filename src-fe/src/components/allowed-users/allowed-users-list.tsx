@@ -15,7 +15,7 @@ const AllowedUsersList = ({ allowedUsers, remove }: Props) => {
     return (
         <div>
             {allowedUsers.map((item) => (
-                <div className={`btn btn-light mb-1 col-12 d-flex justify-content-between align-items-center`}>
+                <div className={`btn mb-1 col-12 d-flex justify-content-between align-items-center`}>
                     <span>{users?.find(user => user._id == item.idUser)?.login}</span>
                     <Button className="btn btn-danger" size="sm" onClick={() => remove(item)}><FaTrash /></Button>
                 </div>

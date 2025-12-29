@@ -3,4 +3,5 @@ export type ShoppingListOutputType = {
     idOwner: string
     name: string
     isDeleted: boolean
+    countItems?: number
 }

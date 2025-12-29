@@ -221,6 +221,10 @@ export async function mockFetch(
         const id = parsedUrl.searchParams.get("id")
         const result = id? db.shoppingLists.filter(x => x._id == id) : [...db.shoppingLists]
 
+        result.forEach(list => {
+            (list as any).countItems = db.listItems.filter(item => item.idShoppingList === list._id && item.isDone === false).length
+        })
+
         return new Response(JSON.stringify(result), {
             status: 200,
             headers: { "Content-Type": "application/json" },

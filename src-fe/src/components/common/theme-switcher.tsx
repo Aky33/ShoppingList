@@ -16,7 +16,7 @@ export default function ThemeSwitcher() {
             onClick={() => setTheme(theme === "light" ? "dark" : "light")}
             className="ms-2"
         >
-        {t("theme")}: {theme === "light" ? "🌞" : "🌙"}
+        {theme === "light" ? "🌞" : "🌙"}
         </Button>
     );
 }
