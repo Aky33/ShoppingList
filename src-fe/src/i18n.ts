@@ -9,6 +9,7 @@ import enShoppingListItem from "./locales/en/shopping-list-item.json";
 import enShoppingListAddForm from "./locales/en/shopping-list-add-form.json";
 import enEntityListAddForm from "./locales/en/entity-list-add-form.json";
 import enAllowedUsersListAddForm from "./locales/en/allowed-users-list-add-form.json";
+import enEntityListPieChart from "./locales/en/entityListPieChart.json";
 
 // CS překlady
 import csLoginPage from "./locales/cs/login-page.json";
@@ -18,6 +19,7 @@ import csShoppingListItem from "./locales/cs/shopping-list-item.json";
 import csShoppingListAddForm from "./locales/cs/shopping-list-add-form.json";
 import csEntityListAddForm from "./locales/cs/entity-list-add-form.json";
 import csAllowedUsersListAddForm from "./locales/cs/allowed-users-list-add-form.json";
+import csEntityListPieChart from "./locales/cs/entityListPieChart.json";
 
 i18n
     .use(initReactI18next)
@@ -30,7 +32,8 @@ i18n
                 shoppingListItem: enShoppingListItem,
                 shoppingListAddForm: enShoppingListAddForm,
                 entityListAddForm: enEntityListAddForm,
-                allowedUsersListAddForm: enAllowedUsersListAddForm
+                allowedUsersListAddForm: enAllowedUsersListAddForm,
+                entityListPieChart: enEntityListPieChart
             },
             cs: {
                 loginPage: csLoginPage,
@@ -39,12 +42,13 @@ i18n
                 shoppingListItem: csShoppingListItem,
                 shoppingListAddForm: csShoppingListAddForm,
                 entityListAddForm: csEntityListAddForm,
-                allowedUsersListAddForm: csAllowedUsersListAddForm
+                allowedUsersListAddForm: csAllowedUsersListAddForm,
+                entityListPieChart: csEntityListPieChart
             },
         },
         lng: "cs",
         fallbackLng: "en",
-        ns: ["loginPage", "navbar", "shoppingList", "shoppingListItem", "shoppingListAddForm", "entityListAddForm", "allowedUsersListAddForm"], // jména namespaces
+        ns: ["loginPage", "navbar", "shoppingList", "shoppingListItem", "shoppingListAddForm", "entityListAddForm", "allowedUsersListAddForm", "entityListPieChart"], // jména namespaces
         defaultNS: "navbar", // výchozí
         interpolation: { escapeValue: false },
     });

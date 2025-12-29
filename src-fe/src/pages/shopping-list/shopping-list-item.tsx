@@ -21,6 +21,7 @@ import type { EntityInputType } from "../../types/entity-input-type"
 import type { AllowedUserInputType } from "../../types/allowed-user-input-type"
 import type { EntityUpdateType } from "../../types/entity-update-type"
 import type { ShoppingListUpdateType } from "../../types/shopping-list-update-type"
+import EntityListPieChart from "../../components/entity-list/entity-list-pie-chart"
 
 const ShoppingListItem = () => {
     const { t } = useTranslation("shoppingListItem");
@@ -100,6 +101,8 @@ const ShoppingListItem = () => {
                     </Card.Title> 
                 </Card.Header>
                 <Card.Body>
+                    <EntityListPieChart entities={entitiesData ? entitiesData : []} />
+
                     {shoppingListsError && <Alert variant="danger">{shoppingListsError}</Alert>}
                     {allowedUsersError && <Alert variant="danger">{allowedUsersError}</Alert>}
                     {entitiesError && <Alert variant="danger">{entitiesError}</Alert>}
