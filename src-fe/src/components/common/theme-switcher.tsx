@@ -1,10 +1,8 @@
 import { useState, useEffect } from "react";
 import { Button } from "react-bootstrap";
-import { useTranslation } from "react-i18next";
 
 export default function ThemeSwitcher() {
     const [theme, setTheme] = useState("light");
-    const { t } = useTranslation();
 
     useEffect(() => {
         document.body.setAttribute("data-bs-theme", theme);
